@@ -12,17 +12,24 @@ pipeline {
   //   booleanParam(name: 'executeTests', defaultValue: true, description: '')
   // }
 
+  parameters {
+    parameters([text(defaultValue: '''
+      ubuntu@127.0.0.1
+      ubuntu@3.25.194.180''', 
+      description: 'List of EC2 Server that need to be deploy', 
+      name: 'serverList')])
+  }
+
   stages {
     stage("Initial") {
       steps {
         script {
           def currentDir = pwd()
-          println("Current Directory: " + currentDir)
-
+          //println("Current Directory: " + currentDir)
           gv = load "${currentDir}/groovy/script.groovy" 
-          gv.buildApp()
-          gv.testApp()
-          gv.deployApp()
+          // gv.buildApp()
+          // gv.testApp()
+          // gv.deployApp()
         }
       }
     }
@@ -50,6 +57,14 @@ pipeline {
     stage('Build') {
       steps {
         sh 'dotnet build --configuration Release'
+      }
+    }
+
+    stage('Deploy') {
+      steps {
+        script {
+          gv.deployApp()
+        }
       }
     }
 
