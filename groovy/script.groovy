@@ -9,7 +9,7 @@ def testApp() {
 def deployApp() {
 	echo 'Call from groovy - deploying the application...'
     //echo "deploying version ${params.VERSION}"
-    echo ${params.serverList}
+    echo "${params.serverList}"
 }
 
 return this
