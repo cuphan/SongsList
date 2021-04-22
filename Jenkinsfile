@@ -19,7 +19,7 @@ pipeline {
           def currentDir = pwd()
           println("Current Directory: " + currentDir)
 
-          gv = load "${currentDir}/script.groovy" 
+          gv = load "${currentDir}/groovy/script.groovy" 
           gv.buildApp()
           gv.testApp()
           gv.deployApp()
