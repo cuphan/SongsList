@@ -10,7 +10,11 @@ def deployApp() {
 	echo 'Call from groovy - deploying the application...'
     //echo "deploying version ${params.VERSION}"
     echo "${params.serverList}"
-    echo "${length(params.serverList)}"
+    //echo "${length(params.serverList)}"
+   def lines = new String(params.serverList).split('\n')
+   for(int i = 0; i < lines.size(); i++) {
+     println lines[i]
+   }
 }
 
 return this
