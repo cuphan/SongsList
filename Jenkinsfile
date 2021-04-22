@@ -1,3 +1,5 @@
+def gv
+
 pipeline {
   agent any
 
@@ -5,7 +7,26 @@ pipeline {
     dotnet = '/usr/bin/dotnet'
   }
 
+  // parameters {
+  //   choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
+  //   booleanParam(name: 'executeTests', defaultValue: true, description: '')
+  // }
+
   stages {
+    stage("Initial") {
+      steps {
+        script {
+          def currentDir = pwd()
+          println("Current Directory: " + currentDir)
+
+          gv = load "${currentDir}/script.groovy" 
+          gv.buildApp()
+          gv.testApp()
+          gv.deployApp()
+        }
+      }
+    }
+
     stage('Checkout') {
       steps {
         // git credentialsId: 'userId', url: 'https://github.com/NeelBhatt/SampleCliApp', branch: 'master'
