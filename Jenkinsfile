@@ -14,8 +14,7 @@ pipeline {
 
   parameters {
     text(name: 'serverList',
-      defaultValue: '''ubuntu@127.0.0.1
-      ubuntu@3.25.194.180''',
+      defaultValue: '''ubuntu@127.0.0.1 ubuntu@3.25.194.180''',
       description: 'List of EC2 Server that need to be deploy')
   }
 
