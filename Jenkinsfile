@@ -7,12 +7,9 @@ pipeline {
     dotnet = '/usr/bin/dotnet'
   }
 
-  // parameters {
-  //   choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
-  //   booleanParam(name: 'executeTests', defaultValue: true, description: '')
-  // }
-
   parameters {
+    //choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
+    //booleanParam(name: 'executeTests', defaultValue: true, description: '')
     text(name: 'serverList',
       defaultValue: '''ubuntu@127.0.0.1, ubuntu@3.25.194.180''',
       description: 'List of EC2 Server that need to be deploy')
@@ -23,8 +20,7 @@ pipeline {
       steps {
         script {
           def currentDir = pwd()
-          //println("Current Directory: " + currentDir)
-          gv = load "${currentDir}/groovy/script.groovy"
+          def gv = load "${currentDir}/groovy/script.groovy"
         }
       }
     }
@@ -58,7 +54,7 @@ pipeline {
         script {
           gv.buildApp()
         }
-        sh "dotnet build --configuration Release"
+        sh "$dotnet build --configuration Release"
       }
     }
 
