@@ -8,8 +8,8 @@ pipeline {
   }
 
   parameters {
-    //choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
-    //booleanParam(name: 'executeTests', defaultValue: true, description: '')
+    choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: 'version')
+    booleanParam(name: 'executeTests', defaultValue: true, description: 'test')
     text(name: 'serverList',
       defaultValue: '''ubuntu@127.0.0.1, ubuntu@3.25.194.180''',
       description: 'List of EC2 Server that need to be deploy')
@@ -31,7 +31,7 @@ pipeline {
       }
     }
 
-    stage('Restore PACKAGES') {
+    stage('Restore') {
       steps {
         script {
           gv.restoreApp()
