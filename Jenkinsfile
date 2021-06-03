@@ -20,7 +20,7 @@ pipeline {
       steps {
         script {
           def currentDir = pwd()
-          def gv = load "${currentDir}/groovy/script.groovy"
+          gv = load "${currentDir}/groovy/script.groovy"
         }
       }
     }
