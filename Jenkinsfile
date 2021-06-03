@@ -24,10 +24,7 @@ pipeline {
         script {
           def currentDir = pwd()
           //println("Current Directory: " + currentDir)
-          gv = load "${currentDir}/groovy/script.groovy" 
-          // gv.buildApp()
-          // gv.testApp()
-          // gv.deployApp()
+          gv = load "${currentDir}/groovy/script.groovy"
         }
       }
     }
@@ -40,19 +37,36 @@ pipeline {
 
     stage('Restore PACKAGES') {
       steps {
+        script {
+          gv.restoreApp()
+        }
         sh "$dotnet restore"
       }
     }
 
     stage('Clean') {
       steps {
+        script {
+          gv.cleanApp()
+        }
         sh "$dotnet clean"
       }
     }
 
     stage('Build') {
       steps {
+        script {
+          gv.buildApp()
+        }
         sh "dotnet build --configuration Release"
+      }
+    }
+
+    stage('Test') {
+      steps {
+        script {
+          gv.testApp()
+        }
       }
     }
 

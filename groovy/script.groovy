@@ -1,3 +1,11 @@
+def restoreApp() {
+	echo 'Call from groovy - Restoring the application...'
+}
+
+def cleanApp() {
+	echo 'Call from groovy - Cleaning the application...'
+}
+
 def buildApp() {
 	echo 'Call from groovy - building the application...'
 }
